@@ -1,11 +1,14 @@
 const express = require("express");
+require("dotenv").config()
 
 const app = express();
 
-app.get("/", (req, res) => {
-    res.json({ ok: true })
-})
+app.use(express.static("public"));
 
-app.listen(3000, () => {
-    console.log("corriendo en el puerto " + 3000)
-})
+//routes
+app.use("/api/auth", require("./routes/auth"))
+
+
+app.listen(process.env.PORT, () => {
+    console.log("corriendo en el puerto " + process.env.PORT)
+});
